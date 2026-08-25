@@ -15,6 +15,7 @@ import {
   FileCode2
 } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
+import profileImg from '../../assets/profile.jpg';
 
 export const Hero = () => {
   const { personal } = portfolioData;
@@ -174,13 +175,9 @@ export const Hero = () => {
                 {/* Author Avatar clean without any overlapping text */}
                 <div className="relative rounded-2xl overflow-hidden aspect-square bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-inner">
                   <img
-                    src={personal.avatarUrl || personal.githubAvatarUrl}
+                    src={profileImg}
                     alt={personal.name}
                     className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = "/profile.jpg";
-                    }}
                   />
                 </div>
 
