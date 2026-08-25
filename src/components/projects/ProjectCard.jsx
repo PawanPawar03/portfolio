@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, ArrowUpRight, Eye, Calendar, Sparkles } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
+import profileImg from '../../assets/profile.jpg';
 
 export const ProjectCard = ({ project, onSelect }) => {
   const { personal } = portfolioData;
@@ -95,13 +96,9 @@ export const ProjectCard = ({ project, onSelect }) => {
           {/* Author info snippet */}
           <div className="flex items-center space-x-2.5">
             <img
-              src={personal.avatarUrl || personal.githubAvatarUrl}
+              src={profileImg}
               alt={personal.name}
               className="w-7 h-7 rounded-full object-cover ring-1 ring-primary-500"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "/profile.jpg";
-              }}
             />
             <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
               {personal.name.split(' ')[0]}
