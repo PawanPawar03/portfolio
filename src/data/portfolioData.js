@@ -14,6 +14,7 @@ export const portfolioData = {
     socialLinks: {
       github: "https://github.com/PawanPawar03",
       linkedin: "https://www.linkedin.com/in/pawan-pawar-aaa19a244",
+      whatsapp: "https://wa.me/919561547711?text=Hii%20Pawan",
       instagram: "https://www.instagram.com/pawan_pawar_1?igsh=OWwybnBkZ3QxYnZu",
       twitter: "https://github.com/PawanPawar03",
     },

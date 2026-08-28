@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon, Github, Linkedin, Instagram, Mail, Code, Terminal } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { portfolioData } from '../../data/portfolioData';
+import { WhatsAppIcon } from '../common/WhatsAppIcon';
 
 export const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -116,6 +117,18 @@ export const Navbar = () => {
               >
                 <Github className="w-4 h-4" />
               </a>
+              {personal.socialLinks.whatsapp && (
+                <a
+                  href={personal.socialLinks.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  title="Chat on WhatsApp (Hii Pawan)"
+                  className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-colors"
+                >
+                  <WhatsAppIcon className="w-4 h-4" />
+                </a>
+              )}
               {personal.socialLinks.instagram && (
                 <a
                   href={personal.socialLinks.instagram}
@@ -237,15 +250,29 @@ export const Navbar = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 text-slate-600 dark:text-slate-300 hover:text-primary-500"
+                  aria-label="GitHub"
                 >
                   <Github className="w-5 h-5" />
                 </a>
+                {personal.socialLinks.whatsapp && (
+                  <a
+                    href={personal.socialLinks.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-slate-600 dark:text-slate-300 hover:text-emerald-500"
+                    aria-label="WhatsApp"
+                    title="Chat on WhatsApp (Hii Pawan)"
+                  >
+                    <WhatsAppIcon className="w-5 h-5" />
+                  </a>
+                )}
                 {personal.socialLinks.instagram && (
                   <a
                     href={personal.socialLinks.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 text-slate-600 dark:text-slate-300 hover:text-primary-500"
+                    aria-label="Instagram"
                   >
                     <Instagram className="w-5 h-5" />
                   </a>

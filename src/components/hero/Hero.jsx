@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 import profileImg from '../../assets/profile.jpg';
+import { WhatsAppIcon } from '../common/WhatsAppIcon';
 
 export const Hero = () => {
   const { personal } = portfolioData;
@@ -136,6 +137,18 @@ export const Hero = () => {
               >
                 <Github className="w-4 h-4" />
               </a>
+              {personal.socialLinks.whatsapp && (
+                <a
+                  href={personal.socialLinks.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-colors"
+                  aria-label="WhatsApp"
+                  title="Chat on WhatsApp (Hii Pawan)"
+                >
+                  <WhatsAppIcon className="w-4 h-4" />
+                </a>
+              )}
               {personal.socialLinks.instagram && (
                 <a
                   href={personal.socialLinks.instagram}

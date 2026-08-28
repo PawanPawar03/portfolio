@@ -17,6 +17,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
+import { WhatsAppIcon } from '../common/WhatsAppIcon';
 
 export const Contact = () => {
   const { personal } = portfolioData;
@@ -172,6 +173,26 @@ export const Contact = () => {
                   </div>
                 )}
 
+                {personal.socialLinks.whatsapp && (
+                  <div className="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-300">
+                    <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                      <WhatsAppIcon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-xs text-slate-400 block font-mono">WhatsApp</span>
+                      <a
+                        href={personal.socialLinks.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center space-x-1"
+                      >
+                        <span>Chat on WhatsApp</span>
+                        <span className="text-xs font-normal text-slate-400 dark:text-slate-500">(Direct message)</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+
                 <div className="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-300">
                   <div className="w-9 h-9 rounded-xl bg-primary-50 dark:bg-primary-500/10 text-primary-500 flex items-center justify-center shrink-0">
                     <MapPin className="w-4 h-4" />
@@ -204,6 +225,7 @@ export const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-primary-500 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-colors"
+                    aria-label="LinkedIn"
                   >
                     <Linkedin className="w-5 h-5" />
                   </a>
@@ -212,15 +234,29 @@ export const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-primary-500 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-colors"
+                    aria-label="GitHub"
                   >
                     <Github className="w-5 h-5" />
                   </a>
+                  {personal.socialLinks.whatsapp && (
+                    <a
+                      href={personal.socialLinks.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-colors"
+                      aria-label="WhatsApp"
+                      title="Chat on WhatsApp (Hii Pawan)"
+                    >
+                      <WhatsAppIcon className="w-5 h-5" />
+                    </a>
+                  )}
                   {personal.socialLinks.instagram && (
                     <a
                       href={personal.socialLinks.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-primary-500 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-colors"
+                      aria-label="Instagram"
                     >
                       <Instagram className="w-5 h-5" />
                     </a>

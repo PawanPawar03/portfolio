@@ -1,6 +1,7 @@
 import React from 'react';
 import { Code, ArrowUp, Github, Linkedin, Instagram, Mail, Heart } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
+import { WhatsAppIcon } from '../common/WhatsAppIcon';
 
 export const Footer = () => {
   const { personal } = portfolioData;
@@ -48,6 +49,18 @@ export const Footer = () => {
               >
                 <Github className="w-4 h-4" />
               </a>
+              {personal.socialLinks.whatsapp && (
+                <a
+                  href={personal.socialLinks.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-emerald-500 transition-colors"
+                  aria-label="WhatsApp"
+                  title="Chat on WhatsApp (Hii Pawan)"
+                >
+                  <WhatsAppIcon className="w-4 h-4" />
+                </a>
+              )}
               {personal.socialLinks.instagram && (
                 <a
                   href={personal.socialLinks.instagram}
