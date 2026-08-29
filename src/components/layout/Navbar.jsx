@@ -50,28 +50,32 @@ export const Navbar = () => {
     if (e && e.preventDefault) {
       e.preventDefault();
     }
+    
+    const wasOpen = mobileMenuOpen;
     setMobileMenuOpen(false);
 
     const targetId = href.replace('#', '');
-    if (targetId === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      window.history.pushState(null, '', '#home');
-      return;
-    }
+    
+    const performScroll = () => {
+      if (targetId === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        try { window.history.pushState(null, '', '#home'); } catch (err) {}
+        return;
+      }
 
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      const headerOffset = 70;
-      const elementPosition = targetElement.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        try { window.history.pushState(null, '', href); } catch (err) {}
+      } else {
+        window.location.hash = href;
+      }
+    };
 
-      window.scrollTo({
-        top: Math.max(0, offsetPosition),
-        behavior: 'smooth'
-      });
-      window.history.pushState(null, '', href);
+    if (wasOpen) {
+      setTimeout(performScroll, 120);
     } else {
-      window.location.hash = href;
+      performScroll();
     }
   };
 

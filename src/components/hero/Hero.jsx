@@ -50,7 +50,7 @@ export const Hero = () => {
   }, [displayText, isDeleting, currentRoleIndex, personal.typingRoles]);
 
   return (
-    <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden border-b border-slate-300/40 dark:border-slate-800/80">
+    <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden border-b border-slate-300/40 dark:border-slate-800/80 scroll-mt-20 md:scroll-mt-24">
       
       {/* Subtle Geeky Background Glow */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-primary-500/5 dark:bg-primary-500/10 rounded-full blur-3xl pointer-events-none -z-10" />

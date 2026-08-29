@@ -56,7 +56,7 @@ export const Skills = () => {
       : categories.find((cat) => cat.id === activeTab)?.skills || [];
 
   return (
-    <section id="skills" className="py-24 border-b border-slate-300/40 dark:border-slate-800/80 relative">
+    <section id="skills" className="py-24 border-b border-slate-300/40 dark:border-slate-800/80 relative scroll-mt-20 md:scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
