@@ -46,6 +46,35 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (e, href) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    setMobileMenuOpen(false);
+
+    const targetId = href.replace('#', '');
+    if (targetId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.history.pushState(null, '', '#home');
+      return;
+    }
+
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const headerOffset = 70;
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth'
+      });
+      window.history.pushState(null, '', href);
+    } else {
+      window.location.hash = href;
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -60,7 +89,8 @@ export const Navbar = () => {
           {/* Geeky Brand Logo */}
           <a
             href="#home"
-            className="flex items-center space-x-2.5 group focus:outline-none"
+            onClick={(e) => scrollToSection(e, '#home')}
+            className="flex items-center space-x-2.5 group focus:outline-none cursor-pointer"
           >
             <div className="w-10 h-10 rounded-xl bg-primary-500 text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
               <Code className="w-5 h-5" />
@@ -84,7 +114,8 @@ export const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                  onClick={(e) => scrollToSection(e, link.href)}
+                  className={`px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer ${
                     isActive
                       ? 'text-primary-500 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10'
                       : 'text-slate-600 dark:text-slate-300 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800/50'
@@ -178,7 +209,8 @@ export const Navbar = () => {
             {/* Contact CTA button */}
             <a
               href="#contact"
-              className="px-4 py-2 text-sm font-semibold rounded-xl geeky-button shadow-sm"
+              onClick={(e) => scrollToSection(e, '#contact')}
+              className="px-4 py-2 text-sm font-semibold rounded-xl geeky-button shadow-sm cursor-pointer"
             >
               Hire Me
             </a>
@@ -189,7 +221,7 @@ export const Navbar = () => {
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center space-x-1 text-xs font-mono"
+              className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center space-x-1 text-xs font-mono cursor-pointer"
             >
               {theme === 'dark' ? (
                 <>
@@ -206,7 +238,7 @@ export const Navbar = () => {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200"
+              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 cursor-pointer"
               aria-label="Toggle Mobile Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -223,25 +255,44 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
             className="md:hidden bg-white dark:bg-[#0f172a] border-b border-slate-200 dark:border-slate-800 px-4 pt-3 pb-6 shadow-xl"
           >
             <div className="flex flex-col space-y-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.substring(1);
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => scrollToSection(e, link.href)}
+                    className={`px-4 py-3 rounded-xl text-sm font-semibold transition-colors flex items-center justify-between cursor-pointer ${
+                      isActive
+                        ? 'text-primary-500 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10 font-bold'
+                        : 'text-slate-700 dark:text-slate-200 hover:text-primary-500 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    {isActive && <span className="w-2 h-2 rounded-full bg-primary-500" />}
+                  </a>
+                );
+              })}
+
+              <a
+                href="#contact"
+                onClick={(e) => scrollToSection(e, '#contact')}
+                className="mt-2 w-full py-2.5 text-center text-sm font-semibold rounded-xl geeky-button shadow-sm block cursor-pointer"
+              >
+                Hire Me / Contact
+              </a>
+
               <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-around">
                 <a
                   href={personal.socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 text-slate-600 dark:text-slate-300 hover:text-primary-500"
+                  aria-label="LinkedIn"
                 >
                   <Linkedin className="w-5 h-5" />
                 </a>
@@ -280,6 +331,7 @@ export const Navbar = () => {
                 <a
                   href={`mailto:${personal.email}`}
                   className="p-2 text-slate-600 dark:text-slate-300 hover:text-primary-500"
+                  aria-label="Email"
                 >
                   <Mail className="w-5 h-5" />
                 </a>
